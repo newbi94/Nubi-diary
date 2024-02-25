@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Nubi-diary",
+    "slug": "Nubi-diary",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Nubi-diary"
+}
