@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import colors from "../colors";
 import { useDB } from "../context";
+import { Alert } from "react-native";
 
 const View = styled.View`
   background-color: ${colors.bgColor};
@@ -57,7 +58,6 @@ const emotions = ["🤯", "🥲", "🤬", "🤗", "🥰", "😊", "🤩"];
 
 const Write = ({ navigation: { goBack } }) => {
   const realm = useDB();
-  //realm을 받아 useContext를 이용해 데이터베이스를 연결했다.
   const [selectedEmotion, setEmotion] = useState(null);
   const [feelings, setFeelings] = useState("");
   const onChangeText = (text) => setFeelings(text);
@@ -66,7 +66,6 @@ const Write = ({ navigation: { goBack } }) => {
     if (feelings === "" || selectedEmotion == null) {
       return Alert.alert("Please complete form.");
     }
-
     realm.write(() => {
       realm.create("Feeling", {
         _id: Date.now(),
@@ -74,19 +73,11 @@ const Write = ({ navigation: { goBack } }) => {
         message: feelings,
       });
     });
-    //선택한 emotion과 작성한 message를 useContext를 이용해 realm에 저장한다.
     goBack();
   };
-  /* setEmotion(null);
-    setFeelings("");
-    goBack으로 인해 위 두 state를 비워주는 동작은 불필요하다.
-    스크린에서 나가지면서 언마운트되면 자연스럽게 state가 default value로
-    돌아오기 때문이다. */
-
   return (
     <View>
       <Title>How do you feel now?</Title>
-
       <Emotions>
         {emotions.map((emotion, index) => (
           <Emotion
@@ -99,10 +90,10 @@ const Write = ({ navigation: { goBack } }) => {
         ))}
       </Emotions>
       <TextInput
-        onChangeText={onChangeText}
+        returnKeyType="done"
         onSubmitEditing={onSubmit}
+        onChangeText={onChangeText}
         value={feelings}
-        returnKeyLabel="done"
         placeholder="Write your feelings..."
       />
       <Btn onPress={onSubmit}>
@@ -111,5 +102,4 @@ const Write = ({ navigation: { goBack } }) => {
     </View>
   );
 };
-
 export default Write;
