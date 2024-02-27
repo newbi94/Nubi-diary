@@ -10,8 +10,7 @@ import {
   TouchableOpacity,
   UIManager,
 } from "react-native";
-import { AdMobBanner } from "react-native-admob";
-
+import { AdMobBanner } from "expo-ads-admob";
 const View = styled.View`
   flex: 1;
   padding: 0px 30px;
@@ -90,12 +89,7 @@ const Home = ({ navigation: { navigate } }) => {
   return (
     <View>
       <Title>My journal</Title>
-      <AdMobBanner
-        adSize="fullBanner"
-        adUnitID="ca-app-pub-3940256099942544/6300978111"
-        testDevices={[AdMobBanner.simulatorId]}
-        onAdFailedToLoad={(error) => console.log(error)}
-      />
+      <AdMobBanner adUnitID="ca-app-pub-3940256099942544/6300978111" />
 
       <FlatList
         data={feelings}

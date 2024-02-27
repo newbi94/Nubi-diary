@@ -7,6 +7,8 @@ import { DBContext } from "./context";
 import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { AdMobBanner } from "react-native-admob";
+import { setTestDeviceIDAsync } from "expo-ads-admob";
+
 SplashScreen.preventAutoHideAsync();
 
 const FeelingSchema = {
@@ -30,6 +32,7 @@ export default function App() {
         schema: [FeelingSchema],
       });
       setRealm(connection);
+      await setTestDeviceIDAsync("EMULATOR");
     } finally {
       setReady(true);
     }
