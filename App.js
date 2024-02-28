@@ -6,8 +6,6 @@ import AppLoading from "expo-app-loading";
 import { DBContext } from "./context";
 import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import { AdMobBanner } from "react-native-admob";
-import { setTestDeviceIDAsync } from "expo-ads-admob";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -61,7 +59,3 @@ export default function App() {
     </View>
   );
 }
-//onLayout을 onReady로 대체해야 할 수도 있다.
-//오히려 이번 경우엔 onLayout이 아니면 로딩화면을 벗어나지 않는다.
-//나의 에러노트를 참조하자면, navigation에 onLayoutRootView를 넣을 때에만
-//onReady로 써준다. onReady는 navigation 한정이다.
